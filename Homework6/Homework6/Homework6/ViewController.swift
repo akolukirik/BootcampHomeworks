@@ -17,7 +17,6 @@ class ViewController: UIViewController {
     @IBOutlet var elektronikButton: UIView!
     @IBOutlet var evButton: UIButton!
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -53,7 +52,7 @@ class ViewController: UIViewController {
         kesfetButton.layer.borderWidth = 2
         kesfetButton.layer.borderColor = UIColor.lightGray.cgColor
         kesfetButton.layer.cornerRadius = 5
-
+        
         erkekButton.layer.cornerRadius = 15
         erkekButton.titleLabel?.textColor = .white
         erkekButton.backgroundColor = .orange
