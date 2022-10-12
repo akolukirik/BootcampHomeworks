@@ -26,8 +26,8 @@ class DetayVC: UIViewController {
     }
 
     @IBAction func buttonGuncelle(_ sender: Any) {
-        if let ka = yapilacakIsLabel.text, let k = yapilacak {
-            kisiDetayPresenterNesnesi?.guncelle(yapilacak_id: k.yapilacak_id!, yapilacak_is: ka)
+        if let guncelle = yapilacakIsLabel.text, let id = yapilacak?.yapilacak_id {
+            kisiDetayPresenterNesnesi?.guncelle(yapilacak_id: id, yapilacak_is: guncelle)
         }
     }
 }

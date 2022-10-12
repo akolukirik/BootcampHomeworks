@@ -99,13 +99,13 @@ extension AnasayfaVC: UITableViewDelegate, UITableViewDataSource {
         let silAction = UIContextualAction(style: .destructive, title: "Sil") {(contextualAction, view, bool) in
             let yapilacak = self.yapilacaklarListe[indexPath.row]
 
-            let alert = UIAlertController(title: "Silme İşlemi", message: "\(yapilacak.yapilacak_id!) silinsin mi?", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Silme İşlemi", message: "\(yapilacak.yapilacak_is!) silinsin mi?", preferredStyle: .alert)
 
             let iptalAction = UIAlertAction(title: "İptal", style: .cancel) { action in }
             alert.addAction(iptalAction)
 
             let evetAction = UIAlertAction(title: "Evet", style: .destructive) { action in
-                self.anasayfaPresenterNesnesi?.sil(yapilacak_id: indexPath.row)
+                self.anasayfaPresenterNesnesi?.sil(yapilacak_id: yapilacak.yapilacak_id ?? 0)
                 // self.kisilerListe.remove(at: indexPath.row)
                 tableView.reloadData()
 

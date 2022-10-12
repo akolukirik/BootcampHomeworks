@@ -26,7 +26,7 @@ class AnasayfaInteractor : PresenterToInteractorAnasayfaProtocol {
             let rs = try db!.executeQuery("SELECT * FROM yapilacaklar WHERE yapilacak_is like '%\(aramaKelimesi)%'", values: nil)
 
             while rs.next() {
-                let kisi = Yapilacaklar(yapilacak_id: Int(rs.string(forColumn: "yapilacaklar_id"))!, yapilacak_is: rs.string(forColumn: "yapilacaklar_is")!)
+                let kisi = Yapilacaklar(yapilacak_id: Int(rs.string(forColumn: "yapilacak_id"))!, yapilacak_is: rs.string(forColumn: "yapilacak_is")!)
                 liste.append(kisi)
             }
 
@@ -40,7 +40,7 @@ class AnasayfaInteractor : PresenterToInteractorAnasayfaProtocol {
     func kisiSil(yapilacak_id: Int) {
         db?.open()
         do{
-            try db!.executeUpdate("DELETE FROM yapilacaklar WHERE yapilacaklar_id = ?", values: [yapilacak_id])
+            try db!.executeUpdate("DELETE FROM yapilacaklar WHERE yapilacak_id = ?", values: [yapilacak_id])
             yapilacaklariAl()
         }catch{
             print(error.localizedDescription)
@@ -56,7 +56,7 @@ class AnasayfaInteractor : PresenterToInteractorAnasayfaProtocol {
             let rs = try db!.executeQuery("SELECT * FROM yapilacaklar", values: nil)
 
             while rs.next() {
-                let kisi = Yapilacaklar(yapilacak_id: Int(rs.string(forColumn: "yapilacaklar_id") ?? ""), yapilacak_is: rs.string(forColumn: "yapilacaklar_is"))
+                let kisi = Yapilacaklar(yapilacak_id: Int(rs.string(forColumn: "yapilacak_id")!), yapilacak_is: rs.string(forColumn: "yapilacak_is"))
                 liste.append(kisi)
             }
 

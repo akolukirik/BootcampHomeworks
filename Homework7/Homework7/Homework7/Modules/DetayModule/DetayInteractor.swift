@@ -13,13 +13,14 @@ class YapilacakDetayInteractor : PresenterToInteractorYapilacakDetayProtocol {
 
     init(){
         let hedefYol = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let veritabaniURL = URL(fileURLWithPath: hedefYol).appendingPathComponent("Yapilacak.sqlite")
+        let veritabaniURL = URL(fileURLWithPath: hedefYol).appendingPathComponent("Yapilacaklar.sqlite")
         db = FMDatabase(path: veritabaniURL.path)
     }
+
     func yapilacakGuncelle(yapilacak_id: Int, yapilacak_is: String) {
         db?.open()
         do{
-            try db!.executeUpdate("UPDATE yapilacak SET yapilacak_is = ? WHERE yapilacak_id = ?", values: [yapilacak_id,yapilacak_is])
+            try db!.executeUpdate("UPDATE yapilacaklar SET yapilacak_is = ? WHERE yapilacak_id = ?", values: [yapilacak_is,yapilacak_id])
         }catch{
             print(error.localizedDescription)
         }
