@@ -17,11 +17,22 @@ class ViewController: UIViewController {
     @IBOutlet var elektronikButton: UIView!
     @IBOutlet var evButton: UIButton!
 
+    @IBOutlet var urunlerCollecitonView: UICollectionView!
+
+    var urunlerlistesi = [UrunModel]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        urunlerCollecitonView.delegate = self
+        urunlerCollecitonView.dataSource = self
 
         configure()
+        fillList()
+        collectionViewLayout()
+        apperance()
+    }
 
+    func apperance() {
         let apperance = UITabBarAppearance()
 
         renkDegistir(itemApperance: apperance.stackedLayoutAppearance)
@@ -30,16 +41,43 @@ class ViewController: UIViewController {
 
         tabBarController?.tabBar.standardAppearance = apperance
         tabBarController?.tabBar.scrollEdgeAppearance = apperance
+    }
 
+    func fillList() {
+        let u1 = UrunModel(urunAd: "iPhone 11 ", urunResimAdi: "33", urunFiyat: "17999 TL")
+        let u2 = UrunModel(urunAd: "Macbook Pro", urunResimAdi: "34", urunFiyat: "34569 TL")
+        let u3 = UrunModel(urunAd: "Airpods 2. Nesil", urunResimAdi: "35", urunFiyat: "2789 TL")
+        let u4 = UrunModel(urunAd: "Nort Face T-shirt", urunResimAdi: "36", urunFiyat: "450 TL")
+        let u5 = UrunModel(urunAd: "Baby Yoda Model", urunResimAdi: "37", urunFiyat: "1750 TL")
+
+        urunlerlistesi.append(u1)
+        urunlerlistesi.append(u2)
+        urunlerlistesi.append(u3)
+        urunlerlistesi.append(u4)
+        urunlerlistesi.append(u5)
+    }
+
+    func collectionViewLayout() {
+        let tasarim = UICollectionViewFlowLayout()
+        tasarim.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        tasarim.minimumLineSpacing = 5
+        tasarim.minimumInteritemSpacing = 5
+        tasarim.scrollDirection = .horizontal
+
+        let ekranGenisligi = UIScreen.main.bounds.width / 2.8
+        let hucreGenisligi = UIScreen.main.bounds.height / 3.75
+
+        tasarim.itemSize = CGSize(width: ekranGenisligi, height: hucreGenisligi )
+
+        urunlerCollecitonView.collectionViewLayout = tasarim
     }
 
     func renkDegistir(itemApperance: UITabBarItemAppearance) {
-        // Seçili durum
+
         itemApperance.selected.iconColor = UIColor.systemOrange
         itemApperance.selected.titleTextAttributes = [.foregroundColor : UIColor.systemOrange]
         itemApperance.selected.badgeBackgroundColor = UIColor.systemOrange
 
-        // Seçili olmadığı durum
         itemApperance.normal.iconColor = UIColor.black
         itemApperance.normal.titleTextAttributes = [.foregroundColor : UIColor.black]
         itemApperance.normal.badgeBackgroundColor = UIColor.black
@@ -77,6 +115,29 @@ class ViewController: UIViewController {
         evButton.layer.borderColor = UIColor.lightGray.cgColor
         evButton.layer.cornerRadius = 15
 
+    }
+
+}
+
+extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return urunlerlistesi.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        let urunler = urunlerlistesi[indexPath.row]
+        let cell = urunlerCollecitonView.dequeueReusableCell(withReuseIdentifier: "urunHucre", for: indexPath) as! CustomCollectionViewCell
+
+        cell.imageView.image = UIImage(named: urunler.urunResimAdi!)
+        cell.descriptionLabel.text = urunler.urunAd
+        cell.priceLabel.text = urunler.urunFiyat
+
+        cell.layer.borderColor = UIColor.lightGray.cgColor
+        cell.layer.borderWidth = 0.3
+
+        return cell
     }
 
 }
