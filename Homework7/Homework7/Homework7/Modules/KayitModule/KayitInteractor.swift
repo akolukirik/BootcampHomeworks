@@ -11,7 +11,7 @@ class KisiKayitInteractor : PresenterToInteractorYapilacakIsKayitProtocol {
 
     let db:FMDatabase?
 
-    init(){
+    init() {
         let hedefYol = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
         let veritabaniURL = URL(fileURLWithPath: hedefYol).appendingPathComponent("Yapilacaklar.sqlite")
         db = FMDatabase(path: veritabaniURL.path)
@@ -19,9 +19,9 @@ class KisiKayitInteractor : PresenterToInteractorYapilacakIsKayitProtocol {
 
     func yapilacakEkle(yapilacak_is: String) {
         db?.open()
-        do{
+        do {
             try db!.executeUpdate("INSERT INTO yapilacaklar (yapilacak_is) VALUES (?)", values: [yapilacak_is])
-        }catch{
+        } catch {
             print(error.localizedDescription)
         }
         db?.close()

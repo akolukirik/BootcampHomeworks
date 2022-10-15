@@ -11,7 +11,7 @@ class KayitVC: UIViewController {
 
     @IBOutlet weak var yapilacakIsLabel: UITextField!
 
-    var yapilacakIsKayitPresenterNesnesi:ViewToPresenterYapilacakIsKayitProtocol?
+    var yapilacakIsKayitPresenterNesnesi: ViewToPresenterYapilacakIsKayitProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,5 +23,4 @@ class KayitVC: UIViewController {
             yapilacakIsKayitPresenterNesnesi?.ekle(yapilacak_is: yapilacak)
         }
     }
-
 }

@@ -31,7 +31,6 @@ class AnasayfaVC: UIViewController {
         anasayfaPresenterNesnesi?.yapilacaklariYukle()
     }
 
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDetay" {
             let yapilacak = sender as? Yapilacaklar
@@ -40,7 +39,7 @@ class AnasayfaVC: UIViewController {
         }
     }
 
-    func veritabaniKopyala(){
+    func veritabaniKopyala() {
         let bundleYolu = Bundle.main.path(forResource: "Yapilacaklar", ofType: ".sqlite")
         let hedefYol = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
         let kopyalanacakYer = URL(fileURLWithPath: hedefYol).appendingPathComponent("Yapilacaklar.sqlite")
@@ -53,7 +52,6 @@ class AnasayfaVC: UIViewController {
             }catch{}
         }
     }
-
 }
 
 
@@ -64,12 +62,10 @@ extension AnasayfaVC: PresenterToViewAnsayfaProtocol {
     }
 }
 
-
 extension AnasayfaVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         anasayfaPresenterNesnesi?.ara(aramaKelimesi: searchText)
     }
-
 }
 
 extension AnasayfaVC: UITableViewDelegate, UITableViewDataSource {
@@ -82,7 +78,7 @@ extension AnasayfaVC: UITableViewDelegate, UITableViewDataSource {
         let yapilacak = yapilacaklarListe[indexPath.row]
         let hucre = tableView.dequeueReusableCell(withIdentifier: "yapilacaklarCell" , for: indexPath) as! YapilacaklarTableViewCell
 
-        hucre.yapilacaklarLabel.text = "\(yapilacak.yapilacak_is ?? "booş")"
+        hucre.yapilacaklarLabel.text = "\(yapilacak.yapilacak_is ?? "")"
 
         return hucre
     }
@@ -106,10 +102,9 @@ extension AnasayfaVC: UITableViewDelegate, UITableViewDataSource {
 
             let evetAction = UIAlertAction(title: "Evet", style: .destructive) { action in
                 self.anasayfaPresenterNesnesi?.sil(yapilacak_id: yapilacak.yapilacak_id ?? 0)
-                // self.kisilerListe.remove(at: indexPath.row)
                 tableView.reloadData()
-
             }
+
             alert.addAction(evetAction)
 
             self.present(alert, animated: true)
@@ -118,4 +113,3 @@ extension AnasayfaVC: UITableViewDelegate, UITableViewDataSource {
         return UISwipeActionsConfiguration(actions: [silAction])
     }
 }
-

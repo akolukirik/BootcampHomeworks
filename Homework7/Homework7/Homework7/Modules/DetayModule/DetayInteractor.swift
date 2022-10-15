@@ -11,7 +11,7 @@ class YapilacakDetayInteractor : PresenterToInteractorYapilacakDetayProtocol {
 
     let db:FMDatabase?
 
-    init(){
+    init() {
         let hedefYol = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
         let veritabaniURL = URL(fileURLWithPath: hedefYol).appendingPathComponent("Yapilacaklar.sqlite")
         db = FMDatabase(path: veritabaniURL.path)
@@ -19,9 +19,9 @@ class YapilacakDetayInteractor : PresenterToInteractorYapilacakDetayProtocol {
 
     func yapilacakGuncelle(yapilacak_id: Int, yapilacak_is: String) {
         db?.open()
-        do{
+        do {
             try db!.executeUpdate("UPDATE yapilacaklar SET yapilacak_is = ? WHERE yapilacak_id = ?", values: [yapilacak_is,yapilacak_id])
-        }catch{
+        } catch {
             print(error.localizedDescription)
         }
         db?.close()

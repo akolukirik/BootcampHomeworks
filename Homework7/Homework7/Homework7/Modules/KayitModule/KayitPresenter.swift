@@ -14,5 +14,4 @@ class KisiKayitPresenter : ViewToPresenterYapilacakIsKayitProtocol {
     func ekle(yapilacak_is: String) {
         yapilacakIsKayitInteractor?.yapilacakEkle(yapilacak_is: yapilacak_is)
     }
-
 }

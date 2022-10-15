@@ -22,7 +22,6 @@ class AnasayfaPresenter : ViewToPresenterAnasayfaProtocol {
     func sil(yapilacak_id: Int) {
         anasayfaInteractor?.kisiSil(yapilacak_id: yapilacak_id)
     }
-
 }
 
 extension AnasayfaPresenter : InteractorToPresenterAnasayfaProtocol {

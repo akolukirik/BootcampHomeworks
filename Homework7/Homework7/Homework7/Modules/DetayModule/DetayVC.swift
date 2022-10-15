@@ -13,7 +13,7 @@ class DetayVC: UIViewController {
 
     var yapilacak: Yapilacaklar?
 
-    var kisiDetayPresenterNesnesi:ViewToPresenterYapilacakDetayProtocol?
+    var kisiDetayPresenterNesnesi: ViewToPresenterYapilacakDetayProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +21,6 @@ class DetayVC: UIViewController {
         if let yapilacak = yapilacak {
             yapilacakIsLabel.text = yapilacak.yapilacak_is
         }
-
         YapilacakDetayRouter.createModule(ref: self)
     }
 
